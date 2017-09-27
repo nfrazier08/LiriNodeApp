@@ -1,0 +1,28 @@
+{
+  "name": "liriapp",
+  "version": "1.0.0",
+  "description": "liri app homework",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nfrazier08/LiriNodeApp.git"
+  },
+  "keywords": [
+    "liri",
+    "app"
+  ],
+  "author": "nfrazier08",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nfrazier08/LiriNodeApp/issues"
+  },
+  "homepage": "https://github.com/nfrazier08/LiriNodeApp#readme",
+  "dependencies": {
+    "node-spotify-api": "^1.0.7",
+    "request": "^2.83.0",
+    "twitter": "^1.7.1"
+  }
+}
