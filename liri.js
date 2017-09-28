@@ -1,25 +1,39 @@
-//Write code to grab the data from keys.js
-    //And store it in a variable
-    //'require' is the keywork to import modules
-    var myTwitterKeys = require("./keys.js");
-    console.log(myTwitterKeys.consumer_key);
 
- 
-    var command = process.argv[2];
-    // // var chosenItem = process.argv[3];
+    //Call in installed packages
+    var twitPackage = require("twitter");
+    var spotifyAPI = require("node-spotify-api");
+    var requestAPI = require("request");
+    
+    //Import keys from the keys.js
+    var twitterConfig = require("./keys.js");
 
-    // //Call in installed packages
-    // var twitter = require("twitter");
-    // var spotifyAPI = require("node-spotify-api");
-    // var requestAPI = require("request");    
+    //New twitter variable
+    //Object of twitPackage that we can call functions inside
+    var T = new twitPackage(twitterConfig)
 
-//     if(command === "myTweets"){
-//         var params = {screen_name: 'nfrazierDevelops', count: 20};
-//         console.log(params.screen_name);
-//         myTwitterKeys.get('statuses/user_timeline', params, function(error, tweets, response) {
-//         if (!error) {
-//             console.log(tweets);
-//             console.log("am i getting something?");
-//         }
-//     });
-// }
+    var params = {
+        screen_name: 'nfrazierDevelop',
+        // screen_name: 'nodejs',
+        count: 20,
+    };
+
+    // T.get('statuses/user_timeline', params, function(error, tweets, response) {
+    //   if (!error) {
+    //     console.log(tweets);
+    //   }
+    // });
+
+    T.get('statuses/user_timeline', params, function(error, tweets, response){
+        // if (!error){
+        console.log(tweets);
+        // console.log(tweets[0].text); //This works, but for only one of the tweets
+        //Create a for loop 
+        for (var i=0; i < response.length; i++){
+            for (var text in tweets[i]) {
+                console.log(tweet);
+            }
+        }
+    })
+        // }
+    // })
+    
