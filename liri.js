@@ -1,19 +1,20 @@
 
     //Call in installed packages
     var twitPackage = require("twitter");
-    var spotifyAPI = require("node-spotify-api");
+    var spotifyPackage = require("node-spotify-api");
     var requestAPI = require("request");
     var inquirer = require('inquirer');
   
     var command = process.argv[2];
     var userChoice = process.argv[3];
 
+
     //TWITTER!!!!!!
     //Import keys from the keys.js
     var twitterConfig = require("./keys.js");
 
     //New twitter variable
-    //Object of twitPackage that we can call functions inside
+    // Object of twitPackage that we can call functions inside
     var T = new twitPackage(twitterConfig)
 
     var params = {
@@ -23,34 +24,30 @@
     };
 
     //SPOTIFY!!!!!!!
-    var spotify = new Spotify({
-     id: '14667e30ccc945ffaec23fbeca690091',
-     secret: '1cd9b6f86ff147529b8a82a4a66b0568'
-    });
+    // var spotifyConfig = require("./keys");
+
+    // var S = new spotifyPackage(spotifyConfig);
     
     if(command === "myTweets"){
         T.get('statuses/user_timeline', params, function(error, tweets, response){
             // if (!error){
-            // console.log(text);
-            console.log(tweets[0].text); //This works, but for only one of the tweets
-            //Create a for loop 
-            // for (var i=0; i < response.length; i++){
-            //     console.log(response)
-            //     for (var text in response[i]) {
-            //        console.log("This is text " + text)
-            //     }
-            // }
+            // console.log(tweets); //This works, but for only one of the tweets
+            // console.log(tweets[0].text)
+            for(var i = 0; i <= tweets.length; i++) {
+                console.log(tweets[i].text)
+            }
+                
         })
     } 
 
-    if(command === "spotify-this-song"){
-        spotify.search({ type: 'track', query: userChoice }, function(err, data) {
-            if (err) {
-              return console.log('Error occurred: ' + err);
-            }
+    // if(command === "spotify-this-song"){
+    //     S.search({ type: 'track', query: userChoice}, function(err, data) {
+    //         if (err) {
+    //           return console.log('Error occurred: ' + err);
+    //         }
            
-          console.log(data); 
-          });
-    }
+    //       console.log(JSON.stringify(data.tracks.items[0], null,2)); 
+    //       });
+    // }
    
       
