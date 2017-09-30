@@ -56,7 +56,9 @@
             if (!error) {
                 // console.log(tweets); //This works!! I am getting my tweets object
                 for(i = 0; i < tweets.length; i++){
-                    console.log(tweets[i].text);
+                    // console.log(tweets[i].text); //YAY!! This also works!!!
+                    console.log(tweets[i].created_at.substring(0, 10) + " " + tweets[i].text);
+
                 }
             }
         })
