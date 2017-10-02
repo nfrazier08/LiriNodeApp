@@ -92,11 +92,11 @@ function printSongInfoFromSpotify(chosenSong) {
                 if (err) {
                    return console.log("Error is: " + err);
                 } else if(!err){
-                   console.log(data);
-                   console.log("artist " + data.tracks.items[0].name);
-                //    console.log("song name " + data.tracks.items[0].)
-                //    console.log("link to song " + data.tracks.items[0].uri)
-                //    console.log("album " + data.tracks.items[0].)
+                    // console.log(JSON.stringify(data.tracks.items[0], null, 3));
+                    console.log("Song artist " + data.tracks.items[0].album.artists[0].name);
+                    console.log("Song name: " + data.tracks.items[0].name);
+                    console.log("Album name: " + data.tracks.items[0].album.name);
+                    console.log("Listen to the song here: " + data.tracks.items[0].album.artists[0].external_urls.spotify);
                 }
             })     
         }
