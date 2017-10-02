@@ -2,7 +2,7 @@
     //Call in installed packages
     var twitter = require("twitter");
     var spotify = require("node-spotify-api");
-    var requestAPI = require("request");
+    var request = require("request");
     var inquirer = require('inquirer');
     //This is used to require in the random file for the do-what it says option
     var fs = require("fs");
@@ -42,9 +42,21 @@
                 console.log(chosenSong);
                 printSongInfoFromSpotify(chosenSong);
             })
-            // printSongInfoFromSpotify();
+            
         } else if(inquirerResponse.app === "movie-this"){
             console.log("Get some cool movie info!");
+            inquirer.prompt([
+                {
+                    type:"input",
+                    message: "What movie would you like to know about?",
+                    name: "movie"
+                }
+            ]).then(function(movieResponse){
+                var chosenMovie = movieResponse.movie;
+                //request call from omdb website
+                console.log(chosenMovie);
+                getSomeMovieInfo(chosenMovie);
+            })
         } else if(inquirerResponse.app === "do-what-it-says"){
             // console.log("you are going to do something else")
             fs.readFile("random.txt", "utf8", function(error, data){
@@ -57,6 +69,7 @@
    }) //End of .then 
 
    //Functions for apps
+   //TWITTER!!!!!!
    function printTweets() {
     //    console.log(appKeys.tKeys); //This works, we are calling the property  
        var client = new twitter(appKeys.tKeys);     
@@ -77,32 +90,42 @@
         })
    }
 
-//    printTweets(); //THIS WORKS!!! YAYAYAYAYAY! 
+    //SPOTIFY!!!!!!!
+    function printSongInfoFromSpotify(chosenSong) {
+            // console.log(appKeys.sKeys);
+            var spotSong = new spotify(appKeys.sKeys);
+            spotSong.search({
+                    type: 'track',
+                    query: chosenSong,
+                    limit: 1
+                }, 
+                function(err, data) {
+                    if (err) {
+                    return console.log("Error is: " + err);
+                    } else if(!err){
+                        // console.log(JSON.stringify(data.tracks.items[0], null, 3));
+                        console.log("Song artist " + data.tracks.items[0].album.artists[0].name);
+                        console.log("Song name: " + data.tracks.items[0].name);
+                        console.log("Album name: " + data.tracks.items[0].album.name);
+                        console.log("Listen to the song here: " + data.tracks.items[0].album.artists[0].external_urls.spotify);
+                    }
+                })     
+            }
 
-
-function printSongInfoFromSpotify(chosenSong) {
-        // console.log(appKeys.sKeys);
-        var spotSong = new spotify(appKeys.sKeys);
-        spotSong.search({
-                type: 'track',
-                query: chosenSong,
-                limit: 1
-            }, 
-            function(err, data) {
-                if (err) {
-                   return console.log("Error is: " + err);
-                } else if(!err){
-                    // console.log(JSON.stringify(data.tracks.items[0], null, 3));
-                    console.log("Song artist " + data.tracks.items[0].album.artists[0].name);
-                    console.log("Song name: " + data.tracks.items[0].name);
-                    console.log("Album name: " + data.tracks.items[0].album.name);
-                    console.log("Listen to the song here: " + data.tracks.items[0].album.artists[0].external_urls.spotify);
-                }
-            })     
-        }
-
-//    printSongInfoFromSpotify();
-   //Artist
-   //Song Name
-   //Preview Link to song
-   //Album
+//OMDB!!!!!
+function getSomeMovieInfo (chosenMovie) {
+    request("http://www.omdbapi.com/?t=" + chosenMovie + "&y=&plot=short&apikey=40e9cece",
+        function (error, response){
+            console.log('error: ', error);
+            console.log('statusCode: ', response && response.statusCode);
+            // console.log(JSON.stringify(response, null, 3));
+            console.log("Title: " + JSON.parse(response.body).Title);
+            console.log("Year: " + JSON.parse(response.body).Year);
+            console.log("Actors: " + JSON.parse(response.body).Actors);
+            console.log("Plot: " + JSON.parse(response.body).Plot);
+            console.log("IMDB: " + JSON.parse(response.body).Ratings[0].Value);
+            console.log("Rotten Tomatoes: " + JSON.parse(response.body).Ratings[1].Value);
+            console.log("Country: " + JSON.parse(response.body).Country);
+            console.log("Language: " + JSON.parse(response.body).Language);      
+        });
+    }
