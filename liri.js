@@ -147,9 +147,10 @@ function readRandomAndDoIt(){
         }
         console.log(data);
         var randomDataArrayFromTxt = data.split(",");
-        console.log("this is the array" + randomDataArrayFromTxt[2]);
-            // if (randomDataArrayFromTxt[0] === "spotify-this-song"){
-            //     printSongInfoFromSpotify(randomDataArrayFromTxt[1]);
-            // }                
+        console.log("Array:" + randomDataArrayFromTxt);
+            // for (i=0; i<randomDataArrayFromTxt.length; i++){
+            //     printSongInfoFromSpotify(randomDataArrayFromTxt[i]);
+            // }   
+        printSongInfoFromSpotify(" ' " + randomDataArrayFromTxt[2] + " ' ");              
         })
-}
+    }
