@@ -143,8 +143,9 @@ function getSomeMovieInfo (chosenMovie) {
 
 //Log spotify to txt file
 function writeIt(chosenSong){
+    var now = new Date();
     // console.log("Writing the song: " + writeSpotifySearch);   
-    fs.appendFile('random.txt',  "\n " + chosenSong, function (error, data){
+    fs.appendFile('random.txt', "\n" + now + " " + chosenSong, function (error, data){
         if (error){
             return console.log ("Error: " + error);
         }
