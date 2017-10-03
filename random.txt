@@ -1,6 +1,15 @@
-spotify-this-song,"I Want it That Way"
-hometown glory
-crash into me
-caroline,caroline
-I will always love you
-mother
+["spotify-this-song", 
+"I Want it That Way", 
+"hometown glory",
+"crash into me",
+"caroline,caroline",
+"I will always love you",
+"mother",
+"havana",
+"slow hands",
+
+
+
+
+
+]

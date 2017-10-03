@@ -60,13 +60,10 @@
             })
         } else if(inquirerResponse.app === "do-what-it-says"){
             // console.log("you are going to do something else")
-            fs.readFile("random.txt", "utf8", function(error, data){
-                if(err){
-                   console.log("you are going to do something else");
-                   //This will default spotify the song "I want it that way" 
-                }
-            })
-        }
+            console.log("you are going to do something else");
+            //This will default spotify the song "I want it that way" 
+            readRandomAndDoIt();
+            }         
    }) //End of .then 
 
    //Functions for apps
@@ -133,12 +130,26 @@ function getSomeMovieInfo (chosenMovie) {
 
 //Log spotify to txt file
 function writeIt(chosenSong){
-    // console.log("Writing the song: " + writeSpotifySearch);
-    fs.appendFile('random.txt', "\n " + chosenSong, function (error, data){
+    // console.log("Writing the song: " + writeSpotifySearch);   
+    fs.appendFile('random.txt',  "\n " + chosenSong, function (error, data){
         if (error){
             return console.log ("Error: " + error);
         }
         console.log("random.txt was updated");
-        
     })
+}
+
+//Read songs logged to random.txt
+function readRandomAndDoIt(){
+    fs.readFile("random.txt", "utf8", function(error, data){
+        if(error){
+            return console.log(error);
+        }
+        console.log(data);
+        var randomDataArrayFromTxt = data.split(",");
+        console.log("this is the array" + randomDataArrayFromTxt[2]);
+            // if (randomDataArrayFromTxt[0] === "spotify-this-song"){
+            //     printSongInfoFromSpotify(randomDataArrayFromTxt[1]);
+            // }                
+        })
 }
