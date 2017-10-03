@@ -61,9 +61,15 @@
                 }
             ]).then(function(movieResponse){
                 var chosenMovie = movieResponse.movie;
+                if (movieResponse.movie === ""){
+                    console.log("Can't think of a movie?")
+                    chosenMovie = "mr nobody";
+                    getSomeMovieInfo(chosenMovie);
+                } else {
                 //request call from omdb website
                 console.log(chosenMovie);
                 getSomeMovieInfo(chosenMovie);
+                }
             })
         } else if(inquirerResponse.app === "do-what-it-says"){
             // console.log("you are going to do something else")
