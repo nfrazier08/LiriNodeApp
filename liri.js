@@ -38,10 +38,17 @@
                 }
             ]).then(function(songResponse){
                 var chosenSong = songResponse.song;
+                if (songResponse.song === ""){
+                    console.log("Too lazy to choose your own song?")
+                    chosenSong = "The Sign"
+                    printSongInfoFromSpotify(chosenSong)
+                } else {
+                // var chosenSong = songResponse.song;
                 //call spotify song function and input song variable
                 console.log(chosenSong);
                 printSongInfoFromSpotify(chosenSong);
                 writeIt(chosenSong);
+                }
             })
             
         } else if(inquirerResponse.app === "movie-this"){
@@ -147,10 +154,13 @@ function readRandomAndDoIt(){
         }
         console.log(data);
         var randomDataArrayFromTxt = data.split(",");
-        console.log("Array:" + randomDataArrayFromTxt);
-            // for (i=0; i<randomDataArrayFromTxt.length; i++){
-            //     printSongInfoFromSpotify(randomDataArrayFromTxt[i]);
-            // }   
-        printSongInfoFromSpotify(" ' " + randomDataArrayFromTxt[2] + " ' ");              
+        // console.log("Array:" + randomDataArrayFromTxt);
+
+        //Get random song from random.txt
+        //This is shooting me an error and I am not sure why...
+        var chooseRandomSong = randomDataArrayFromTxt[Math.floor(Math.random() * randomDataArrayFromTxt.length)];
+            
+        // printSongInfoFromSpotify("'" + randomDataArrayFromTxt[4] + "'");      
+        printSongInfoFromSpotify("I want it that way");        
         })
     }
