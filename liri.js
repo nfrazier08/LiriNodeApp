@@ -41,6 +41,7 @@
                 //call spotify song function and input song variable
                 console.log(chosenSong);
                 printSongInfoFromSpotify(chosenSong);
+                writeIt(chosenSong);
             })
             
         } else if(inquirerResponse.app === "movie-this"){
@@ -90,27 +91,27 @@
         })
    }
 
-    //SPOTIFY!!!!!!!
-    function printSongInfoFromSpotify(chosenSong) {
-            // console.log(appKeys.sKeys);
-            var spotSong = new spotify(appKeys.sKeys);
-            spotSong.search({
-                    type: 'track',
-                    query: chosenSong,
-                    limit: 1
-                }, 
-                function(err, data) {
-                    if (err) {
-                    return console.log("Error is: " + err);
-                    } else if(!err){
-                        // console.log(JSON.stringify(data.tracks.items[0], null, 3));
-                        console.log("Song artist " + data.tracks.items[0].album.artists[0].name);
-                        console.log("Song name: " + data.tracks.items[0].name);
-                        console.log("Album name: " + data.tracks.items[0].album.name);
-                        console.log("Listen to the song here: " + data.tracks.items[0].album.artists[0].external_urls.spotify);
-                    }
-                })     
-            }
+//SPOTIFY!!!!!!!
+function printSongInfoFromSpotify(chosenSong) {
+    // console.log(appKeys.sKeys);
+    var spotSong = new spotify(appKeys.sKeys);
+    spotSong.search({
+        type: 'track',
+        query: chosenSong,
+        limit: 1
+    }, 
+        function(err, data) {
+            if (err) {
+            return console.log("Error is: " + err);
+          } else if(!err){
+            // console.log(JSON.stringify(data.tracks.items[0], null, 3));
+            console.log("Song artist " + data.tracks.items[0].album.artists[0].name);
+            console.log("Song name: " + data.tracks.items[0].name);
+            console.log("Album name: " + data.tracks.items[0].album.name);
+            console.log("Listen to the song here: " + data.tracks.items[0].album.artists[0].external_urls.spotify);
+        }
+    })     
+}
 
 //OMDB!!!!!
 function getSomeMovieInfo (chosenMovie) {
@@ -129,3 +130,15 @@ function getSomeMovieInfo (chosenMovie) {
             console.log("Language: " + JSON.parse(response.body).Language);      
         });
     }
+
+//Log spotify to txt file
+function writeIt(chosenSong){
+    // console.log("Writing the song: " + writeSpotifySearch);
+    fs.appendFile('random.txt', "\n " + chosenSong, function (error, data){
+        if (error){
+            return console.log ("Error: " + error);
+        }
+        console.log("random.txt was updated");
+        
+    })
+}
