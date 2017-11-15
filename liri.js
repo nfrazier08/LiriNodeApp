@@ -20,7 +20,7 @@
                         "movie-this",
                         "do-what-it-says"],
             name: "app",
-            }
+        }
    ]).then(function(inquirerResponse){
         //Define what happens with each of the choices
         if(inquirerResponse.app === "myTweets"){
@@ -164,10 +164,8 @@ function readRandomAndDoIt(){
         // console.log("Array:" + randomDataArrayFromTxt);
 
         //Get random song from random.txt
-        //This is shooting me an error and I am not sure why...
-        var chooseRandomSong = randomDataArrayFromTxt[Math.floor(Math.random() * randomDataArrayFromTxt.length)];
-            
-        // printSongInfoFromSpotify("'" + randomDataArrayFromTxt[4] + "'");      
+        //Didn't work before time stamp and now its a tad more complicated, now that I've added the time stamp....
+        // var chooseRandomSong = randomDataArrayFromTxt[Math.floor(Math.random() * randomDataArrayFromTxt.length)];                
         printSongInfoFromSpotify("I want it that way");        
         })
     }
